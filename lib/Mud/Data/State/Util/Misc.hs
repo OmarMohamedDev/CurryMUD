@@ -408,16 +408,16 @@ leaveParty i ms = let helper p = memberOfHelper . myGroupHelper . followersHelpe
 -----
 
 linkDirToCmdName :: LinkDir -> CmdName
-linkDirToCmdName North     = "n"
-linkDirToCmdName Northeast = "ne"
-linkDirToCmdName East      = "e"
-linkDirToCmdName Southeast = "se"
-linkDirToCmdName South     = "s"
-linkDirToCmdName Southwest = "sw"
-linkDirToCmdName West      = "w"
-linkDirToCmdName Northwest = "nw"
-linkDirToCmdName Up        = "u"
-linkDirToCmdName Down      = "d"
+linkDirToCmdName Nord     = "n"
+linkDirToCmdName Nordest = "ne"
+linkDirToCmdName Est      = "e"
+linkDirToCmdName Sudest = "se"
+linkDirToCmdName Sud     = "s"
+linkDirToCmdName Sudovest = "so"
+linkDirToCmdName Ovest      = "o"
+linkDirToCmdName Nordovest = "no"
+linkDirToCmdName Sopra        = "su"
+linkDirToCmdName Sotto      = "so"
 
 -----
 
