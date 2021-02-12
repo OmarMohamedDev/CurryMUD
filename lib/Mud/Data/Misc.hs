@@ -202,10 +202,10 @@ class Pretty a where
   pp :: a -> Text
 
 instance Pretty ActType where
-  pp Attacking   = "attacking"
-  pp Drinking    = "drinking"
-  pp Eating      = "eating"
-  pp Sacrificing = "sacrificing a corpse"
+  pp Attacking   = "attaccando"
+  pp Drinking    = "bevendo"
+  pp Eating      = "mangiando"
+  pp Sacrificing = "sacrificando un corpo"
 
 instance Pretty AlertExecRec where
   pp AlertExecRec { .. } = slashes [ dbTimestamp
@@ -239,13 +239,13 @@ instance Pretty Attrib where
 instance Pretty BanHostRec where
   pp BanHostRec { .. } = slashes [ dbTimestamp
                                  , dbHost
-                                 , bool "unbanned" "banned" dbIsBanned
+                                 , bool "sbannato" "bannato" dbIsBanned
                                  , dbReason ]
 
 instance Pretty BanPCRec where
   pp BanPCRec { .. } = slashes [ dbTimestamp
                                , dbName
-                               , bool "unbanned" "banned" dbIsBanned
+                               , bool "sbannato" "bannato" dbIsBanned
                                , dbReason ]
 
 instance Pretty BonusRec where
@@ -255,21 +255,21 @@ instance Pretty BonusRec where
                                , commaShow dbAmt ]
 
 instance Pretty Book where
-  pp BookCreation    = "creation"
-  pp BookDwarf       = "dwarf"
-  pp BookElf         = "elf"
-  pp BookFelinoid    = "felinoid"
-  pp BookHistory     = "history"
+  pp BookCreation    = "creazione"
+  pp BookDwarf       = "nano"
+  pp BookElf         = "elfo"
+  pp BookFelinoid    = "felinoide"
+  pp BookHistory     = "storia"
   pp BookHobbit      = "hobbit"
-  pp BookHoly        = "holy"
-  pp BookHuman       = "human"
-  pp BookLagomorph   = "lagomorph"
+  pp BookHoly        = "santo"
+  pp BookHuman       = "umano"
+  pp BookLagomorph   = "lagomorfo"
   pp BookLopolwanmi  = "lopolwanmi"
-  pp BookMaps        = "maps"
-  pp BookNymph       = "nymph"
-  pp BookRaces       = "races"
+  pp BookMaps        = "mappe"
+  pp BookNymph       = "ninfa"
+  pp BookRaces       = "razze"
   pp BookShunfalipmi = "shunfalipmi"
-  pp BookVulpenoid   = "vulpenoid"
+  pp BookVulpenoid   = "vulpinoide"
 
 instance Pretty BugRec where
   pp BugRec { .. } = slashes [ dbTimestamp
@@ -281,24 +281,24 @@ instance Pretty ChanContext where
   pp ChanContext { .. } = someCmdName <> maybeEmp spcL someChanName
 
 instance Pretty Cloth where
-  pp Backpack = "backpack"
-  pp Bracelet = "bracelet"
-  pp Cloak    = "cloak"
-  pp Coat     = "coat"
-  pp Dress    = "dress"
-  pp Earring  = "earring"
+  pp Backpack = "zaino"
+  pp Bracelet = "braccialetto"
+  pp Cloak    = "mantello"
+  pp Coat     = "cappotto"
+  pp Dress    = "vestito"
+  pp Earring  = "orecchini"
   pp FullBody = "robes"
-  pp Necklace = "necklace"
-  pp NoseRing = "nose ring"
-  pp Ring     = "ring"
-  pp Shirt    = "shirt"
-  pp Skirt    = "skirt"
+  pp Necklace = "collana"
+  pp NoseRing = "anello da naso"
+  pp Ring     = "anello"
+  pp Shirt    = "maglietta"
+  pp Skirt    = "gonna"
   pp Smock    = "smock"
-  pp Trousers = "trousers"
+  pp Trousers = "pantaloni"
 
 instance Pretty ConsumpEffects where
   pp (ConsumpEffects mouths secs effectList) =
-      commas [ "mouthfuls: " <> commaShow mouths, "seconds: " <> commaShow secs, "effects: " <> pp effectList ]
+      commas [ "mouthfuls: " <> commaShow mouths, "secondi: " <> commaShow secs, "effetti: " <> pp effectList ]
 
 instance Pretty CurryMonth where
   pp DunLun  = "Dun Lun"
@@ -311,13 +311,13 @@ instance Pretty CurryMonth where
   pp NutLun  = "Nut Lun"
 
 instance Pretty CurryWeekday where
-  pp SunDay   = "Sun Day"
-  pp MoonDay  = "Moon Day"
-  pp FireDay  = "Fire Day"
-  pp WaterDay = "Water Day"
-  pp WoodDay  = "Wood Day"
-  pp WindDay  = "Wind Day"
-  pp StarDay  = "Star Day"
+  pp SunDay   = "Giorno del Sole"
+  pp MoonDay  = "Giorno della Luna"
+  pp FireDay  = "Giorno del Fuoco"
+  pp WaterDay = "Giorno dell'Acqua"
+  pp WoodDay  = "Giorno del Legno"
+  pp WindDay  = "Giorno del Vento"
+  pp StarDay  = "Giorno delle Stelle"
 
 instance Pretty DiscoverRec where
   pp DiscoverRec { .. } = slashes [ dbTimestamp
@@ -345,14 +345,14 @@ instance Pretty Effect where
   pp (Effect effTag effSub effVal secs effFeeling) = T.concat [ "[durational] "
                                                               , maybeEmp (spcR . dblQuote) effTag
                                                               , pp effSub
-                                                              , " by "
+                                                              , " da "
                                                               , effectValHelper effVal
                                                               , " "
                                                               , mkSecsTxt secs
                                                               , effectFeelingHelper effFeeling ]
 
 mkSecsTxt :: Seconds -> Text
-mkSecsTxt secs = parensQuote $ commaShow secs <> " seconds"
+mkSecsTxt secs = parensQuote $ commaShow secs <> " secondi"
 
 effectValHelper :: Maybe EffectVal -> Text
 effectValHelper = maybe "(no value)" pp
@@ -388,67 +388,67 @@ instance Pretty Food where
 
 instance Pretty God where
   pp (God godName godOf maybeSexRace) = let t = maybeEmp (spcL . parensQuote . uncurry (|<>|) . (pp *** pp)) maybeSexRace
-                                        in T.concat [ pp godName, ", god of ", pp godOf, t ]
+                                        in T.concat [ pp godName, ", dio della  ", pp godOf, t ]
 
 instance Pretty GodName where
   pp = showTxt
 
 instance Pretty GodOf where
-  pp GodOfArtAndEngineering = "art and engineering"
-  pp GodOfDarkness          = "darkness"
+  pp GodOfArtAndEngineering = "grande arte e ingegneria"
+  pp GodOfDarkness          = "oscurità"
   pp GodOfDebauchery        = "debauchery"
-  pp GodOfHarvest           = "the harvest"
-  pp GodOfLight             = "light"
-  pp GodOfMoonAndMagic      = "the moon and magic"
-  pp GodOfNature            = "nature"
-  pp GodOfPsionics          = "psionics"
-  pp GodOfWar               = "war"
-  pp GodOfWealth            = "wealth"
+  pp GodOfHarvest           = "benedizione del raccolto"
+  pp GodOfLight             = "luce"
+  pp GodOfMoonAndMagic      = "la luna e magia"
+  pp GodOfNature            = "natura"
+  pp GodOfPsionics          = "arte psionica"
+  pp GodOfWar               = "guerra"
+  pp GodOfWealth            = "beatitudine e benessere"
 
 instance Pretty Hand where
-  pp RHand  = "right-handed"
-  pp LHand  = "left-handed"
+  pp RHand  = "destro"
+  pp LHand  = "mancino"
   pp NoHand = "not handed"
 
 instance Pretty InstaEffect where
-  pp (InstaEffect effSub effVal effFeeling) = T.concat [ "[instantaneous] ", pp effSub, " by "
+  pp (InstaEffect effSub effVal effFeeling) = T.concat [ "[istantaneo] ", pp effSub, " da "
                                                        , effectValHelper effVal, effectFeelingHelper effFeeling ]
 
 instance Pretty InstaEffectSub where
   pp EntInstaEffectFlags         = "ent flags"
   pp (MobInstaEffectPts ptsType) = "mob "   <> pp ptsType
   pp RmInstaEffectFlags          = "room flags"
-  pp (InstaEffectOther fn)       = "other " <> parensQuote fn
+  pp (InstaEffectOther fn)       = "altro " <> parensQuote fn
 
 instance Pretty Lang where
-  pp CommonLang    = "common"
-  pp DwarfLang     = "dwarvish"
-  pp ElfLang       = "elvish"
-  pp FelinoidLang  = "felinoidean"
-  pp HobbitLang    = "hobbitish"
-  pp HumanLang     = "hominal"
-  pp LagomorphLang = "lagomorphean"
-  pp NymphLang     = "naelyni"
-  pp VulpenoidLang = "vulpenoidean"
+  pp CommonLang    = "comune"
+  pp DwarfLang     = "nanico"
+  pp ElfLang       = "elfico"
+  pp FelinoidLang  = "felinoide"
+  pp HobbitLang    = "hobbit"
+  pp HumanLang     = "umano"
+  pp LagomorphLang = "lagomorfico"
+  pp NymphLang     = "ninfatico"
+  pp VulpenoidLang = "vulpinoide"
 
 instance Pretty LightSub where
-  pp Torch       = "torch"
-  pp (Lamp secs) = "lamp " <> mkSecsTxt secs
+  pp Torch       = "torcia"
+  pp (Lamp secs) = "lampada " <> mkSecsTxt secs
 
 instance Pretty LinkDir where
   pp = uncapitalize . showTxt
 
 instance Pretty Liq where
-  pp l@(Liq _ _ smell taste drink) = T.concat [ "NOUN ",   renderLiqNoun l aOrAn
-                                              , " SMELL ", noneOnNull . f $ smell
-                                              , " TASTE ", noneOnNull . f $ taste
+  pp l@(Liq _ _ smell taste drink) = T.concat [ "NOME ",   renderLiqNoun l aOrAn
+                                              , " ODORE ", noneOnNull . f $ smell
+                                              , " GUSTO ", noneOnNull . f $ taste
                                               , " DRINK ", noneOnNull . f $ drink ]
     where
       f t = onFalse (()# t) dblQuote t
 
 instance Pretty LoggedInOrOut where
-  pp LoggedIn  = "logged in"
-  pp LoggedOut = "logged out"
+  pp LoggedIn  = "connesso"
+  pp LoggedOut = "disconnesso"
 
 instance Pretty MobSize where
   pp SmlMinus = "Sml Minus"
@@ -459,7 +459,7 @@ instance Pretty MobSize where
   pp LrgPlus  = "Lrg Plus"
 
 instance Pretty MoonPhase where
-  pp NewMoon        = "new"
+  pp NewMoon        = "nuova"
   pp WaxingCrescent = "waxing crescent"
   pp FirstQuarter   = "first quarter"
   pp WaxingGibbous  = "waxing gibbous"
@@ -481,27 +481,27 @@ instance Pretty PtsType where
   pp Fp = "cur FP"
 
 instance Pretty Race where
-  pp Dwarf     = "dwarf"
-  pp Elf       = "elf"
-  pp Felinoid  = "felinoid"
+  pp Dwarf     = "nano"
+  pp Elf       = "elfo"
+  pp Felinoid  = "felinoide"
   pp Hobbit    = "hobbit"
-  pp Human     = "human"
-  pp Lagomorph = "lagomorph"
-  pp Nymph     = "nymph"
-  pp Vulpenoid = "vulpenoid"
+  pp Human     = "umano"
+  pp Lagomorph = "lagomorfo"
+  pp Nymph     = "ninfa"
+  pp Vulpenoid = "vulpinoide"
 
 instance Pretty RightOrLeft where
-  pp R   = "right"
-  pp L   = "left"
+  pp R   = "destra"
+  pp L   = "sinistra"
   pp rol = pp . fromRol @Slot $ rol
 
 instance Pretty RmEnv where
-  pp InsideUnlitEnv = "inside (unlit)"
-  pp InsideLitEnv   = "inside (lit)"
-  pp OutsideEnv     = "outside"
-  pp ShopEnv        = "shop"
-  pp SpecialEnv     = "special"
-  pp NoEnv          = "none"
+  pp InsideUnlitEnv = "interno (unlit)"
+  pp InsideLitEnv   = "interno (lit)"
+  pp OutsideEnv     = "esterno"
+  pp ShopEnv        = "negozio"
+  pp SpecialEnv     = "speciale"
+  pp NoEnv          = "niente"
 
 instance Pretty SetOp where
   pp Assign    = "="
@@ -509,21 +509,21 @@ instance Pretty SetOp where
   pp SubAssign = "-="
 
 instance Pretty Sex where
-  pp Male   = "male"
-  pp Female = "female"
+  pp Male   = "maschio"
+  pp Female = "femmina"
   pp NoSex  = none
 
 instance Pretty Slot where
   -- Clothing slots:
-  pp EarringR1S  = "right ear"
-  pp EarringR2S  = "right ear"
-  pp EarringL1S  = "left ear"
-  pp EarringL2S  = "left ear"
-  pp NoseRing1S  = "nose"
-  pp NoseRing2S  = "nose"
-  pp Necklace1S  = "neck"
-  pp Necklace2S  = "neck"
-  pp Necklace3S  = "neck"
+  pp EarringR1S  = "orecchio destro"
+  pp EarringR2S  = "orecchio destro"
+  pp EarringL1S  = "orecchio sinistro"
+  pp EarringL2S  = "orecchio sinistro"
+  pp NoseRing1S  = "naso"
+  pp NoseRing2S  = "naso"
+  pp Necklace1S  = "collo"
+  pp Necklace2S  = "collo"
+  pp Necklace3S  = "collo"
   pp BraceletR1S = "right wrist"
   pp BraceletR2S = "right wrist"
   pp BraceletR3S = "right wrist"
@@ -538,31 +538,31 @@ instance Pretty Slot where
   pp RingLMS     = "left middle finger"
   pp RingLRS     = "left ring finger"
   pp RingLPS     = "left pinky finger"
-  pp ShirtS      = "shirt"
+  pp ShirtS      = "maglietta"
   pp SmockS      = "smock"
-  pp CoatS       = "coat"
-  pp TrousersS   = "trousers"
-  pp SkirtS      = "skirt"
-  pp DressS      = "dress"
+  pp CoatS       = "cappotto"
+  pp TrousersS   = "pantaloni"
+  pp SkirtS      = "gonna"
+  pp DressS      = "vestito"
   pp FullBodyS   = "about body"
   pp BackpackS   = "backpack"
   pp CloakS      = "cloak"
   -- Armor slots:
-  pp HeadS       = "head"
+  pp HeadS       = "testa"
   pp TorsoS      = "torso"
-  pp ArmsS       = "arms"
-  pp HandsS      = "hands"
+  pp ArmsS       = "braccia"
+  pp HandsS      = "mani"
   pp LowerBodyS  = "lower body"
-  pp FeetS       = "feet"
+  pp FeetS       = "piede"
   -- Weapon/shield slots:
-  pp RHandS      = "right hand"
-  pp LHandS      = "left hand"
-  pp BothHandsS  = "both hands"
+  pp RHandS      = "mano destra"
+  pp LHandS      = "mano sinistra"
+  pp BothHandsS  = "entrambe le mani"
 
 instance Pretty Stance where
-  pp Offensive = "offensive"
-  pp Neutral   = "neutral"
-  pp Defensive = "defensive"
+  pp Offensive = "offensivo"
+  pp Neutral   = "neutrale"
+  pp Defensive = "difensivo"
 
 instance Pretty StomachCont where
   pp (StomachCont (Left  dli) t b) = ppStomachContHelper (showTxt dli) t b
@@ -598,19 +598,19 @@ instance Pretty TelnetCode where
   pp TelnetWON'T       = "WON'T"
 
 instance Pretty Type where
-  pp ArmType        = "piece of armor"
-  pp ClothType      = "piece of clothing"
-  pp ConType        = "container"
+  pp ArmType        = "pezzo di armatura"
+  pp ClothType      = "vestiario"
+  pp ConType        = "contenitore"
   pp CorpseType     = "corpse"
-  pp FoodType       = "food"
-  pp HolySymbolType = "holy symbol"
-  pp LightType      = "light"
-  pp NpcType        = "NPC"
-  pp ObjType        = "object"
-  pp PlaType        = "player"
-  pp RmType         = "room"
+  pp FoodType       = "cibo"
+  pp HolySymbolType = "simbolo sacro"
+  pp LightType      = "luce"
+  pp NpcType        = "mob"
+  pp ObjType        = "oggetto"
+  pp PlaType        = "giocatore"
+  pp RmType         = "stanza"
   pp VesselType     = "vessel"
-  pp WpnType        = "weapon"
+  pp WpnType        = "arma"
   pp WritableType   = "writable"
 
 instance Pretty TypoRec where
@@ -872,9 +872,9 @@ data EatBundle = EatBundle { eaterId     :: Id
 data EquipInvLookCmd = EquipCmd | InvCmd | LookCmd deriving Eq
 
 instance Show EquipInvLookCmd where
-  show EquipCmd = "equipment"
-  show InvCmd   = "inventory"
-  show LookCmd  = "look"
+  show EquipCmd = "equipaggiamento"
+  show InvCmd   = "inventario"
+  show LookCmd  = "guarda"
 
 -----
 

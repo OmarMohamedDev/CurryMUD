@@ -591,10 +591,10 @@ instance FromJSON Mob where parseJSON = jsonToMob
 instance ToJSON   Mob where toJSON    = mobToJSON
 
 mobToJSON :: Mob -> Value
-mobToJSON Mob { .. } = object [ "sex"              .= _sex
-                              , "st"               .= _st
-                              , "dx"               .= _dx
-                              , "ht"               .= _ht
+mobToJSON Mob { .. } = object [ "sesso"              .= _sex
+                              , "for"               .= _st
+                              , "dex"               .= _dx
+                              , "tag"               .= _ht
                               , "ma"               .= _ma
                               , "ps"               .= _ps
                               , "curHp"            .= _curHp
@@ -607,7 +607,7 @@ mobToJSON Mob { .. } = object [ "sex"              .= _sex
                               , "maxFp"            .= _maxFp
                               , "exp"              .= _exp
                               , "lvl"              .= _lvl
-                              , "hand"             .= _hand
+                              , "mano"             .= _hand
                               , "knownLangs"       .= _knownLangs
                               , "rmId"             .= _rmId
                               , "lastRmId"         .= _lastRmId
@@ -620,13 +620,13 @@ mobToJSON Mob { .. } = object [ "sex"              .= _sex
                               , "corpseCapacity"   .= _corpseCapacity
                               , "corpseDecompSecs" .= _corpseDecompSecs
                               , "party"            .= _party
-                              , "stomach"          .= _stomach ]
+                              , "stomaco"          .= _stomach ]
 
 jsonToMob :: Value -> Parser Mob
-jsonToMob (Object o) = Mob <$> o .: "sex"
-                           <*> o .: "st"
-                           <*> o .: "dx"
-                           <*> o .: "ht"
+jsonToMob (Object o) = Mob <$> o .: "sesso"
+                           <*> o .: "for"
+                           <*> o .: "dex"
+                           <*> o .: "tag"
                            <*> o .: "ma"
                            <*> o .: "ps"
                            <*> o .: "curHp"
@@ -639,7 +639,7 @@ jsonToMob (Object o) = Mob <$> o .: "sex"
                            <*> o .: "maxFp"
                            <*> o .: "exp"
                            <*> o .: "lvl"
-                           <*> o .: "hand"
+                           <*> o .: "mano"
                            <*> o .: "knownLangs"
                            <*> o .: "rmId"
                            <*> o .: "lastRmId"
@@ -652,7 +652,7 @@ jsonToMob (Object o) = Mob <$> o .: "sex"
                            <*> o .: "corpseCapacity"
                            <*> o .: "corpseDecompSecs"
                            <*> o .: "party"
-                           <*> o .: "stomach"
+                           <*> o .: "stomaco"
                            <*> pure Nothing
                            <*> pure M.empty
                            <*> pure M.empty
@@ -861,16 +861,16 @@ data RmLink = StdLink    { _slDir        :: LinkDir
                          , _nslOriginMsg :: Text
                          , _nslDestMsg   :: Text } deriving (Eq, Generic)
 
-data LinkDir = North
-             | Northeast
-             | East
-             | Southeast
-             | South
-             | Southwest
-             | West
-             | Northwest
-             | Up
-             | Down deriving (Eq, Generic, Show)
+data LinkDir = Nord
+             | Nordest
+             | Est
+             | Sudest
+             | Sud
+             | Sudovest
+             | Ovest
+             | NordOvest
+             | Sopra
+             | Sotto deriving (Eq, Generic, Show)
 
 type MoveCost = Int
 

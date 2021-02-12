@@ -17,7 +17,7 @@ langsNoCommon :: [Lang]
 langsNoCommon = CommonLang `delete` allValues
 
 mkCmdNameForLang :: Lang -> CmdName
-mkCmdNameForLang CommonLang = "say"
+mkCmdNameForLang CommonLang = "di"
 mkCmdNameForLang l          = pp l
 
 mkInLangTxtForLang :: Lang -> CmdName
