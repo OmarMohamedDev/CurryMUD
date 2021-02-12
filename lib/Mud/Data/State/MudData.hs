@@ -868,7 +868,7 @@ data LinkDir = Nord
              | Sud
              | Sudovest
              | Ovest
-             | NordOvest
+             | Nordovest
              | Sopra
              | Sotto deriving (Eq, Generic, Show)
 
